@@ -1,0 +1,88 @@
+<div class="form-container">
+  <mat-toolbar color="primary">
+    <span>Visa Predictor</span>
+    <span class="fillRemainingSpace"></span>
+    <span>Model accuracy: {{accuracy}}</span>
+  </mat-toolbar>
+  <form>
+    <mat-form-field class="form-element">
+      <input type="text" required placeholder="Class of immigration visa held at the time of application" [(ngModel)]="columns.class_of_admission.selectedOption"
+        matInput [formControl]="columns.class_of_admission.control" [errorStateMatcher]="parentErrorStateMatcher" [matAutocomplete]="classOfAdmission">
+      <mat-autocomplete #classOfAdmission="matAutocomplete">
+        <mat-option *ngFor="let option of columns.class_of_admission.filteredOptions" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="!columns.class_of_admission.control.valid">
+        Invalid option
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-element">
+      <input type="text" required placeholder="Country of citizenship" [(ngModel)]="columns.country_of_citizenship.selectedOption" matInput
+        [formControl]="columns.country_of_citizenship.control" [errorStateMatcher]="parentErrorStateMatcher" [matAutocomplete]="countryOfCitizenship">
+      <mat-autocomplete #countryOfCitizenship="matAutocomplete">
+        <mat-option *ngFor="let option of columns.country_of_citizenship.filteredOptions" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="!columns.country_of_citizenship.valid">
+        Invalid option
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-element">
+      <input type="text" required placeholder="Highest Education achieved" [(ngModel)]="columns.foreign_worker_info_education.selectedOption"
+        matInput [formControl]="columns.foreign_worker_info_education.control" [errorStateMatcher]="parentErrorStateMatcher"
+        [matAutocomplete]="infoEducation">
+      <mat-autocomplete #infoEducation="matAutocomplete">
+        <mat-option *ngFor="let option of columns.foreign_worker_info_education.filteredOptions" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="!columns.foreign_worker_info_education.control.valid">
+        Invalid option
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-element">
+      <input type="text" required placeholder="Major field(s) of study in reference to the highest level achieved" [(ngModel)]="columns.foreign_worker_info_major.selectedOption"
+        matInput [formControl]="columns.foreign_worker_info_major.control" [errorStateMatcher]="parentErrorStateMatcher" [matAutocomplete]="infoMajor">
+      <mat-autocomplete #infoMajor="matAutocomplete">
+        <mat-option *ngFor="let option of columns.foreign_worker_info_major.filteredOptions" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="!columns.foreign_worker_info_major.control.valid">
+        Invalid option
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-element">
+      <input type="text" required placeholder="State information of the foreign worker's intended area of employment" [(ngModel)]="columns.job_info_work_state.selectedOption"
+        matInput [formControl]="columns.job_info_work_state.control" [errorStateMatcher]="parentErrorStateMatcher" [matAutocomplete]="workState">
+      <mat-autocomplete #workState="matAutocomplete">
+        <mat-option *ngFor="let option of columns.job_info_work_state.filteredOptions" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="!columns.job_info_work_state.control.valid">
+        Invalid option
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-element">
+      <input type="text" required placeholder="Name associated with the PW SOC Code" [(ngModel)]="columns.pw_soc_title.selectedOption" matInput
+        [formControl]="columns.pw_soc_title.control" [errorStateMatcher]="parentErrorStateMatcher" [matAutocomplete]="socTitle">
+      <mat-autocomplete #socTitle="matAutocomplete">
+        <mat-option *ngFor="let option of columns.pw_soc_title.filteredOptions" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="!columns.pw_soc_title.control.valid">
+        Invalid option
+      </mat-error>
+    </mat-form-field>
+  </form>
+  <mat-card class="card">
+    <mat-card-content>
+      Predicted result: {{result}}
+      <button class="submitButton" mat-raised-button color="primary" (click)="onSubmit()">Predict</button>
+    </mat-card-content>
+  </mat-card>
+</div>
